@@ -1,0 +1,4 @@
+== Fixed in 7.1
+
+* DOCS-1237 Yet another issue
+* DOCS-1236 Another issue

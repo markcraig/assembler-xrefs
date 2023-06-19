@@ -1,0 +1,4 @@
+.Example docs
+* xref:example:ROOT:index.adoc[]
+* xref:example:ROOT:published.adoc[]
+//* xref :example:ROOT:_unpublished.adoc[]

@@ -1,0 +1,72 @@
+= Antora Assembler xrefs to unpublished files.
+
+This project includes commented xrefs to unpublished files.
+
+== Before you start
+
+Follow the instructions in the 
+https://gitlab.com/antora/antora-assembler/-/blob/main/README.adoc[Antora Assembler README]
+to install the software you need for the builds.
+
+This repo provides the `Gemfile`, `antora-assembler.yml`, and `pdf-theme.yml` files.
+
+== Build HTML
+
+[source,zsh]
+----
+npx antora playbook.yml --stacktrace
+----
+
+Expected output:
+
+----
+Site generation complete!
+Open file:///path/to/assembler-xrefs/build/site/index.html in a browser to view your site.
+----
+
+== Build PDF
+
+[source,zsh]
+----
+npx antora playbook-pdf.yml --stacktrace
+----
+
+Expected output:
+
+----
+[timestamp] FATAL (antora): Cannot read properties of undefined (reading 'url')
+    Cause: TypeError
+        at /usr/local/lib/node_modules/@antora/pdf-extension/node_modules/@antora/assembler/lib/produce-aggregate-document.js:265:45
+        at [Symbol.replace] (<anonymous>)
+        at String.replace (<anonymous>)
+        at aggregateAsciiDoc (/usr/local/lib/node_modules/@antora/pdf-extension/node_modules/@antora/assembler/lib/produce-aggregate-document.js:232:21)
+        at /usr/local/lib/node_modules/@antora/pdf-extension/node_modules/@antora/assembler/lib/produce-aggregate-document.js:425:12
+        at Array.forEach (<anonymous>)
+        at aggregateAsciiDoc (/usr/local/lib/node_modules/@antora/pdf-extension/node_modules/@antora/assembler/lib/produce-aggregate-document.js:423:11)
+        at produceAggregateDocument (/usr/local/lib/node_modules/@antora/pdf-extension/node_modules/@antora/assembler/lib/produce-aggregate-document.js:21:16)
+        at /usr/local/lib/node_modules/@antora/pdf-extension/node_modules/@antora/assembler/lib/produce-aggregate-documents.js:38:11
+        at Array.map (<anonymous>)
+----
+
+If you break the xref in index.adoc:
+
+[source,diff]
+----
+diff --git a/asciidoc/modules/ROOT/pages/index.adoc b/asciidoc/modules/ROOT/pages/index.adoc
+index 210b343..bce197c 100644
+--- a/asciidoc/modules/ROOT/pages/index.adoc
++++ b/asciidoc/modules/ROOT/pages/index.adoc
+@@ -3,4 +3,4 @@
+ Reference to a published page: xref:published.adoc[]
+
+ Commented reference to an unpublished page:
+-//xref:_unpublished.adoc[]
++//xref :_unpublished.adoc[]
+----
+
+Then the build completes successfully:
+
+----
+Site generation complete!
+Open file:///Users/markc/Downloads/assembler-xrefs/build/site/index.html in a browser to view your site.
+----

@@ -1,0 +1,4 @@
+== Fixed in 7.0
+
+* DOCS-1235 Test issue
+* DOCS-1234 Broken build

@@ -1,0 +1,14 @@
+site:
+  title: Example docs
+  url: https://example.com/docs
+  start_page: example:ROOT:index.adoc
+content:
+  sources:
+    - url: .
+      start_path: asciidoc
+ui:
+  bundle:
+    url: https://cdn.forgerock.com/docs-ui/dev/ui-bundle.zip
+antora:
+  extensions:
+    - '@antora/pdf-extension'
